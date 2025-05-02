@@ -1,0 +1,89 @@
+<p-toast position="top-right"></p-toast>
+
+<div class="container d-flex justify-content-center align-items-center vh-100">
+  <div class="login-container card p-4 shadow border-primary" style="width: 100%; max-width: 500px;">
+    <h2 class="text-center mb-4">SIGN UP</h2>
+
+    <form #signupForm="ngForm" novalidate>
+      <!-- Username Field -->
+      <div class="mb-3">
+        <label for="username" class="form-label fw-semibold">Username</label>
+        <input pInputText
+               type="text"
+               id="username"
+               name="username"
+               [(ngModel)]="user.username"
+               placeholder="Enter your username"
+               class="form-control border"
+               required
+               maxlength="50"
+               #usernameModel="ngModel">
+        <small class="text-danger" *ngIf="usernameModel.invalid && (usernameModel.dirty || usernameModel.touched)">
+          <span *ngIf="usernameModel.errors?.['required']">Username is required.</span>
+          <span *ngIf="usernameModel.errors?.['maxlength']">Username cannot exceed 50 characters.</span>
+        </small>
+      </div>
+
+      <!-- Password Field -->
+      <div class="mb-3">
+        <label for="password" class="form-label fw-semibold">Password</label>
+        <p-password
+          id="password"
+          [(ngModel)]="user.password"
+          name="password"
+          placeholder="Enter your password"
+          required
+          [toggleMask]="true"
+          [feedback]="false"
+          class="border"
+          [style]="{'width':'100%'}"
+          [inputStyle]="{'width':'100%'}"
+          #passwordModel="ngModel">
+        </p-password>
+        <small class="text-danger" *ngIf="passwordModel.invalid && (passwordModel.dirty || passwordModel.touched)">
+          <span *ngIf="passwordModel.errors?.['required']">Password is required.</span>
+        </small>
+      </div>
+
+      <!-- Confirm Password Field -->
+      <div class="mb-3">
+        <label for="confirmPassword" class="form-label fw-semibold">Confirm Password</label>
+        <p-password
+          id="confirmPassword"
+        
+          name="confirmPassword"
+          placeholder="Confirm your password"
+          required
+          [toggleMask]="true"
+          [feedback]="false"
+          class="border"
+          [style]="{'width':'100%'}"
+          [inputStyle]="{'width':'100%'}"
+         >
+        </p-password>
+        <!-- <small class="text-danger" *ngIf="confirmPasswordModel.invalid && (confirmPasswordModel.dirty || confirmPasswordModel.touched)">
+          <span *ngIf="confirmPasswordModel.errors?.['required']">Confirm Password is required.</span>
+        </small> -->
+        <!-- <small class="text-danger" *ngIf="user.password && user.confirmPassword && user.password !== user.confirmPassword">
+          Passwords do not match.
+        </small> -->
+      </div>
+
+      <!-- Signup Button -->
+      <p-button type="button" pRipple (click)="signup(signupForm)" label="Sign Up"
+                class="w-100 text-center" severity="success">
+      </p-button>
+    </form>
+
+    <!-- Error Message -->
+    <p class="text-danger text-center mt-2">{{signupError}}</p>
+
+    <!-- Extra Links -->
+    <div class="text-center mt-3">
+      <div class="d-flex justify-content-center align-items-center gap-2">
+        <a routerLink="/login" class="text-decoration-none">Already have an account? Login</a>
+      </div>
+    </div>
+  </div>
+</div>
+
